@@ -160,6 +160,8 @@ impl Wallet {
             hex_encode(&message, &mut dst).expect("hex");
             String::from_utf8(dst.to_vec()).expect("utf8")
         };
+        println!("Address hex: {}", address_hex);
+        println!("Message hex: {}", message_hex);
         let mut child = Command::new(&self.ckb_cli_bin)
             .stdin(Stdio::piped())
             .stderr(Stdio::piped())
