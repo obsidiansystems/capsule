@@ -180,8 +180,14 @@ impl Wallet {
             .spawn()?;
         unsafe {
             let stdin = child.stdin.as_mut().expect("Failed to open stdin");
+            let p = password.take();
+
+            let mut input : String = p.to_owned();
+            input.push_str("\n");
+            input.push_str(&p);
+
             stdin
-                .write_all(password.take().as_bytes())
+                .write_all(input.as_bytes())
                 .expect("Failed to write to stdin");
         }
 
