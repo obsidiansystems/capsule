@@ -193,6 +193,7 @@ impl Wallet {
 
         let output = util::handle_cmd(child.wait_with_output()?)?;
         let output = String::from_utf8(output).expect("parse utf8");
+        println!("Child process output: {}", output);
         let output = output.trim_start_matches("Password:").trim();
         let output: SignatureOutput = serde_json::from_str(output).expect("parse json");
         if !output.recoverable {
