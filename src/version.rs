@@ -1,4 +1,5 @@
-use anyhow::{anyhow, Error};
+// use anyhow::{anyhow, Error};
+use anyhow::{Error};
 use std::str::FromStr;
 use std::string::ToString;
 
@@ -13,8 +14,23 @@ pub struct Version {
 impl FromStr for Version {
     type Err = Error;
 
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
+    fn from_str(_s: &str) -> Result<Self, Self::Err> {
         // parse commit id
+        // TODO(skylar): Commit id in nix!
+        let major = 0;
+        let minor = 7;
+        let patch = 3;
+        let commit_id = "nix".to_string();
+        let pre = "nix".to_string();
+
+        Ok(Self {
+            major,
+            minor,
+            patch,
+            commit_id,
+            pre,
+        })
+        /*
         let items: Vec<_> = s.split_ascii_whitespace().collect();
         if items.len() > 2 || items.is_empty() {
             return Err(anyhow!(
@@ -44,7 +60,7 @@ impl FromStr for Version {
             patch,
             pre,
             commit_id,
-        })
+        })*/
     }
 }
 impl ToString for Version {
